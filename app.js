@@ -2,7 +2,7 @@ const KEY='ink_journal';
 const $=s=>document.querySelector(s);
 const grid=$('#grid'),status=$('#status'),count=$('#count');
 const dlg=$('#dlg'),form=$('#form'),dlgTitle=$('#dlgTitle'),submit=$('#submit');
-const search=$('#search'),starsEl=$('#stars'),hex=$('#hex'),custom=$('#custom'),shadeEl=$('#shade'),presets=$('#presets');
+const search=$('#search'),starsEl=$('#stars'),hex=$('#hex'),custom=$('#custom'),shadeEl=$('#shade'),presets=$('#presets'),preview=$('#preview');
 let inks=load(),editingId=null;
 
 function load(){
@@ -24,6 +24,7 @@ function applyShade(){
   const v=+shadeEl.value,t=Math.abs(v-50)/50;
   form.color.value=v<50?mix(base,t,0):v>50?mix(base,t,255):base;
   hex.textContent=form.color.value;
+  preview.style.background=form.color.value;
 }
 
 function render(){

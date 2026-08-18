@@ -7,6 +7,7 @@ A lightweight single-page journal for tracking fountain pen inks as visual color
 - Add, edit, and delete inks
 - Ink name, brand, color, notes, and 1–5 rating
 - Preset color swatches + custom color picker with a dark-to-light shade slider
+- Subtle motion: dialog entrance, tactile press states, live shade preview (reduced-motion safe)
 - Visual swatch-card grid
 - Real-time search by ink name or brand
 - Newest-first ordering

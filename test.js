@@ -3,7 +3,7 @@ const fs=require('fs'),assert=require('assert');
 const code=fs.readFileSync('app.js','utf8');
 const ctl=()=>({value:"",addEventListener(t,f){this["h"+t]=f},dispatch(t,ev={}){const h=this["h"+t];if(h)h({preventDefault(){},...ev})},focus(){}});
 const star=()=>{const o={attrs:{},cls:{},setAttribute(k,v){o.attrs[k]=String(v)},classList:{toggle(c,f){o.cls[c]=f}}};return o};
-const el=()=>({value:"",textContent:"",innerHTML:"",id:"",dataset:{},children:[],open:false,closed:false,classList:{toggle(){}},setAttribute(){},addEventListener(t,f){this["h"+t]=f},dispatch(t,ev={}){const h=this["h"+t];if(h)h({preventDefault(){},target:ev.target||this,...ev})},close(){this.closed=true;this.dispatch("close")},showModal(){this.open=true},reset(){},focus(){}});
+const el=()=>({value:"",textContent:"",innerHTML:"",id:"",dataset:{},children:[],style:{},open:false,closed:false,classList:{toggle(){}},setAttribute(){},addEventListener(t,f){this["h"+t]=f},dispatch(t,ev={}){const h=this["h"+t];if(h)h({preventDefault(){},target:ev.target||this,...ev})},close(){this.closed=true;this.dispatch("close")},showModal(){this.open=true},reset(){},focus(){}});
 const els={};
 global.document={querySelector(s){if(!els[s]){els[s]=el();if(s==="#form"){for(const n of["name","brand","color","notes","rating"])els[s][n]=ctl();}if(s==="#stars"){els[s].children=Array.from({length:5},()=>star());}}return els[s];}};
 let saved=null,alertMsg="";
@@ -13,7 +13,7 @@ global.alert=m=>{alertMsg=m};
 const $=s=>document.querySelector(s);
 const form=$("#form"),dlg=$("#dlg"),grid=$("#grid"),status=$("#status"),count=$("#count");
 const search=$("#search"),starsEl=$("#stars"),hex=$("#hex"),dlgTitle=$("#dlgTitle");
-const customEl=$("#custom"),shadeEl=$("#shade"),presetsEl=$("#presets");
+const customEl=$("#custom"),shadeEl=$("#shade"),presetsEl=$("#presets"),previewEl=$("#preview");
 global.localStorage.getItem=()=>JSON.stringify([
 {id:"a1",name:"Oxblood",brand:"Diamine",color:"#6d1828",notes:"Rich burgundy.",rating:3.5,createdAt:100},
 {id:"a2",name:"Kon-Peki",brand:"Iroshizuku",color:"#2ea8e0",notes:"",rating:5,createdAt:200},
@@ -123,6 +123,7 @@ assert.strictEqual(form.color.value,"#2ea8e0");
 assert.strictEqual(hex.textContent,"#2ea8e0");
 shadeEl.value=25;shadeEl.dispatch("input");
 assert.strictEqual(form.color.value,"#175470");
+assert.strictEqual(previewEl.style.background,"#175470");
 shadeEl.value=0;shadeEl.dispatch("input");
 assert.strictEqual(form.color.value,"#000000");
 shadeEl.value=100;shadeEl.dispatch("input");
@@ -131,6 +132,7 @@ shadeEl.value=50;
 customEl.value="#123456";customEl.dispatch("input");
 assert.strictEqual(form.color.value,"#123456");
 assert.strictEqual(hex.textContent,"#123456");
+assert.strictEqual(previewEl.style.background,"#123456");
 openForm(inks.find(i=>i.name==="Oxblood 2").id);
 assert.strictEqual(customEl.value,"#6d1828");
 assert.strictEqual(form.color.value,"#6d1828");
