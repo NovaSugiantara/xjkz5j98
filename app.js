@@ -50,7 +50,7 @@ function render(){
 }
 
 function setRating(r){
-  form.rating.value=r;
+  form.rating.value=r=Math.min(5,Math.max(1,+r||3));
   [...starsEl.children].forEach((b,i)=>(b.classList.toggle('on',i<r),b.setAttribute('aria-pressed',i<r)));
 }
 function openForm(id){
