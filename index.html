@@ -31,7 +31,7 @@
     <div class="card skeleton" aria-hidden="true"><div class="swatch"></div><div class="card-body"><div class="sk sk-brand"></div><div class="sk sk-name"></div><div class="sk sk-note"></div></div></div>
   </section>
 
-  <dialog id="dlg">
+  <dialog id="dlg" aria-labelledby="dlgTitle">
     <form id="form">
       <h2 id="dlgTitle">Add ink</h2>
       <label>Ink name
@@ -51,11 +51,11 @@
         <legend>Rating</legend>
         <input type="hidden" name="rating" value="3">
         <div class="stars" id="stars">
-          <button type="button" value="1" aria-label="Rate 1 out of 5">★</button>
-          <button type="button" value="2" aria-label="Rate 2 out of 5">★</button>
-          <button type="button" value="3" aria-label="Rate 3 out of 5">★</button>
-          <button type="button" value="4" aria-label="Rate 4 out of 5">★</button>
-          <button type="button" value="5" aria-label="Rate 5 out of 5">★</button>
+          <button type="button" value="1" aria-label="Rate 1 out of 5" aria-pressed="true">★</button>
+          <button type="button" value="2" aria-label="Rate 2 out of 5" aria-pressed="true">★</button>
+          <button type="button" value="3" aria-label="Rate 3 out of 5" aria-pressed="true">★</button>
+          <button type="button" value="4" aria-label="Rate 4 out of 5" aria-pressed="false">★</button>
+          <button type="button" value="5" aria-label="Rate 5 out of 5" aria-pressed="false">★</button>
         </div>
       </fieldset>
       <div class="form-actions">
