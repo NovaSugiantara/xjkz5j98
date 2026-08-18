@@ -59,5 +59,5 @@ dialog textarea{resize:vertical;min-height:64px}
 .empty-swatch::before,.empty-swatch::after{content:"";position:absolute;background:var(--line)}
 .empty-swatch::before{left:50%;top:26%;bottom:26%;width:2px;transform:translateX(-50%)}
 .empty-swatch::after{top:50%;left:26%;right:26%;height:2px;transform:translateY(-50%)}
-@media(max-width:520px){.toolbar{flex-direction:column}.toolbar .btn{width:100%}}
+@media(max-width:520px){.toolbar{flex-direction:column}.toolbar .btn{width:100%}.actions .btn{padding:10px 14px;font-size:1rem}.stars button{padding:8px 6px}}
 @media(prefers-reduced-motion:reduce){*{transition:none;animation:none}}
