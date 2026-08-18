@@ -21,9 +21,15 @@
 
   <p class="meta" id="count" aria-live="polite"></p>
 
-  <section id="status" class="status" aria-live="polite"></section>
+  <section id="status" class="status" aria-live="polite">
+    <p class="loading">Opening the journal…</p>
+  </section>
 
-  <section class="grid" id="grid" aria-label="Ink swatches"></section>
+  <section class="grid" id="grid" aria-label="Ink swatches">
+    <div class="card skeleton" aria-hidden="true"><div class="swatch"></div><div class="card-body"><div class="sk sk-brand"></div><div class="sk sk-name"></div><div class="sk sk-note"></div></div></div>
+    <div class="card skeleton" aria-hidden="true"><div class="swatch"></div><div class="card-body"><div class="sk sk-brand"></div><div class="sk sk-name"></div><div class="sk sk-note"></div></div></div>
+    <div class="card skeleton" aria-hidden="true"><div class="swatch"></div><div class="card-body"><div class="sk sk-brand"></div><div class="sk sk-name"></div><div class="sk sk-note"></div></div></div>
+  </section>
 
   <dialog id="dlg">
     <form id="form">

@@ -41,7 +41,7 @@ function render(){
   }).join('');
   count.textContent=inks.length?(q?`${list.length} of ${inks.length} inks`:`${inks.length} ink${inks.length===1?'':'s'}`):'';
   if(!inks.length){
-    status.innerHTML='<h2>Your ink shelf is empty.</h2><p>Add your first bottle or sample to start the journal.</p><button class="btn primary" id="emptyAdd" type="button">Add ink</button>';
+    status.innerHTML='<div class="empty-visual" aria-hidden="true"><span class="empty-swatch"></span><span class="empty-swatch"></span><span class="empty-swatch"></span></div><h2>Your ink shelf is empty.</h2><p>Add your first bottle or sample to start the journal.</p><button class="btn primary" id="emptyAdd" type="button">Add ink</button>';
   }else if(!list.length){
     status.innerHTML='<h2>No inks match this search.</h2><p>Try another ink name or brand.</p>';
   }else{

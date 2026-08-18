@@ -47,5 +47,17 @@ dialog textarea{resize:vertical;min-height:64px}
 .stars button{background:none;border:0;padding:2px 5px;font-size:1.5rem;line-height:1;color:var(--line);cursor:pointer}
 .stars button.on{color:var(--accent)}
 .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:4px}
+.skeleton .swatch{background:var(--line)}
+.sk{height:10px;border-radius:5px;background:var(--line);margin-top:8px}
+.sk-brand{width:40%}
+.sk-name{width:70%;height:16px}
+.sk-note{width:90%}
+@keyframes pulse{50%{opacity:.35}}
+.skeleton .swatch,.sk{animation:pulse 1.6s ease-in-out infinite}
+.empty-visual{display:flex;gap:10px;justify-content:center;margin-bottom:20px}
+.empty-swatch{width:52px;height:52px;border:2px dashed var(--line);border-radius:12px;position:relative}
+.empty-swatch::before,.empty-swatch::after{content:"";position:absolute;background:var(--line)}
+.empty-swatch::before{left:50%;top:26%;bottom:26%;width:2px;transform:translateX(-50%)}
+.empty-swatch::after{top:50%;left:26%;right:26%;height:2px;transform:translateY(-50%)}
 @media(max-width:520px){.toolbar{flex-direction:column}.toolbar .btn{width:100%}}
-@media(prefers-reduced-motion:reduce){*{transition:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none;animation:none}}
