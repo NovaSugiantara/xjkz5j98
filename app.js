@@ -8,7 +8,7 @@ let inks=load(),editingId=null;
 function load(){
   try{
     const arr=JSON.parse(localStorage.getItem(KEY)||'[]');
-    return Array.isArray(arr)?arr.filter(i=>i&&typeof i.name==='string'&&typeof i.brand==='string'):[];
+    return Array.isArray(arr)?arr.filter(i=>i&&typeof i.name==='string'&&typeof i.brand==='string'&&typeof i.id==='string'&&i.id&&/^#[0-9a-f]{6}$/i.test(i.color)):[];
   }catch(e){return []}
 }
 function save(){
@@ -22,9 +22,9 @@ const uid=()=>crypto.randomUUID();
 function render(){
   const q=search.value.trim().toLowerCase();
   const list=inks.filter(i=>!q||i.name.toLowerCase().includes(q)||i.brand.toLowerCase().includes(q))
-                 .sort((a,b)=>b.createdAt-a.createdAt);
+                 .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   grid.innerHTML=list.map(c=>{
-    const r=Math.min(5,Math.max(0,+c.rating||0));
+    const r=Math.min(5,Math.max(0,Math.round(+c.rating)||0));
     return `<article class="card">
       <div class="swatch" style="background:${esc(c.color)}" role="img" aria-label="Ink color ${esc(c.color)}"></div>
       <div class="card-body">
@@ -33,8 +33,8 @@ function render(){
         <p class="rating" aria-label="${r} out of 5">${starStr(r)}</p>
         ${c.notes?`<p class="note">${esc(c.notes)}</p>`:''}
         <div class="actions">
-          <button class="btn" data-act="edit" data-id="${c.id}">Edit</button>
-          <button class="btn danger" data-act="del" data-id="${c.id}">Delete</button>
+          <button class="btn" data-act="edit" data-id="${esc(c.id)}">Edit</button>
+          <button class="btn danger" data-act="del" data-id="${esc(c.id)}">Delete</button>
         </div>
       </div>
     </article>`;
@@ -50,7 +50,7 @@ function render(){
 }
 
 function setRating(r){
-  form.rating.value=r=Math.min(5,Math.max(1,+r||3));
+  form.rating.value=r=Math.min(5,Math.max(1,Math.round(+r)||3));
   [...starsEl.children].forEach((b,i)=>(b.classList.toggle('on',i<r),b.setAttribute('aria-pressed',i<r)));
 }
 function openForm(id){
@@ -77,7 +77,7 @@ form.addEventListener('submit',e=>{
   e.preventDefault();
   const name=form.name.value.trim(),brand=form.brand.value.trim();
   if(!name||!brand)return;
-  const data={name,brand,color:form.color.value,notes:form.notes.value.trim(),rating:+form.rating.value||3};
+  const data={name,brand,color:/^#[0-9a-f]{6}$/i.test(form.color.value)?form.color.value:'#6d1828',notes:form.notes.value.trim(),rating:+form.rating.value||3};
   if(editingId){
     const ink=inks.find(i=>i.id===editingId);
     if(ink)Object.assign(ink,data);
