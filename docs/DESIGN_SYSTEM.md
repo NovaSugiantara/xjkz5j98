@@ -209,11 +209,14 @@ Name and brand can sit side by side only when enough width is available.
 
 ### Color control
 
-Use native `<input type="color">`.
+Prefer quick-select preset ink colors, then a native custom picker:
 
-Display the chosen color adjacent to its hex value when convenient.
+- preset swatch buttons for common ink colors;
+- native `<input type="color">` for custom color;
+- native `<input type="range">` shade slider from dark to light, applied to the selected base color (preset or custom);
+- hex readout next to the picker.
 
-Do not add a custom color picker.
+All controls remain native elements (buttons, color input, range input); no custom widget or library.
 
 ### Rating
 
