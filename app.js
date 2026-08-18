@@ -17,7 +17,7 @@ function save(){
 }
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const starStr=r=>'★'.repeat(r)+'☆'.repeat(5-r);
-const uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random().toString(36).slice(2);
+const uid=()=>crypto.randomUUID();
 
 function render(){
   const q=search.value.trim().toLowerCase();
@@ -51,7 +51,7 @@ function render(){
 
 function setRating(r){
   form.rating.value=r;
-  [...starsEl.children].forEach((b,i)=>b.classList.toggle('on',i<r));
+  [...starsEl.children].forEach((b,i)=>(b.classList.toggle('on',i<r),b.setAttribute('aria-pressed',i<r)));
 }
 function openForm(id){
   editingId=id||null;
