@@ -2,7 +2,7 @@ const KEY='ink_journal';
 const $=s=>document.querySelector(s);
 const grid=$('#grid'),status=$('#status'),count=$('#count');
 const dlg=$('#dlg'),form=$('#form'),dlgTitle=$('#dlgTitle'),submit=$('#submit');
-const search=$('#search'),starsEl=$('#stars'),hex=$('#hex');
+const search=$('#search'),starsEl=$('#stars'),hex=$('#hex'),custom=$('#custom'),shadeEl=$('#shade'),presets=$('#presets');
 let inks=load(),editingId=null;
 
 function load(){
@@ -18,6 +18,13 @@ function save(){
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const starStr=r=>'★'.repeat(r)+'☆'.repeat(5-r);
 const uid=()=>crypto.randomUUID();
+let base='#6d1828';
+const mix=(h,t,to)=>'#'+[1,3,5].map(i=>{const v=parseInt(h.slice(i,i+2),16);return Math.round(v+(to-v)*t).toString(16).padStart(2,'0')}).join('');
+function applyShade(){
+  const v=+shadeEl.value,t=Math.abs(v-50)/50;
+  form.color.value=v<50?mix(base,t,0):v>50?mix(base,t,255):base;
+  hex.textContent=form.color.value;
+}
 
 function render(){
   const q=search.value.trim().toLowerCase();
@@ -59,16 +66,18 @@ function openForm(id){
   const ink=id?inks.find(i=>i.id===id):null;
   dlgTitle.textContent=ink?'Edit ink':'Add ink';
   submit.textContent=ink?'Save changes':'Save ink';
+  base=ink?ink.color:'#6d1828';
+  custom.value=base;
+  shadeEl.value=50;
+  applyShade();
   if(ink){
     form.name.value=ink.name;
     form.brand.value=ink.brand;
-    form.color.value=ink.color;
     form.notes.value=ink.notes||'';
     setRating(ink.rating);
   }else{
     setRating(3);
   }
-  hex.textContent=form.color.value;
   dlg.showModal();
   form.name.focus();
 }
@@ -94,7 +103,16 @@ starsEl.addEventListener('click',e=>{
   const b=e.target.closest('button');
   if(b)setRating(+b.value);
 });
-form.color.addEventListener('input',()=>hex.textContent=form.color.value);
+presets.addEventListener('click',e=>{
+  const b=e.target.closest('button[data-c]');
+  if(!b)return;
+  base=b.dataset.c;
+  custom.value=base;
+  applyShade();
+  [...presets.children].forEach(x=>x.classList.toggle('on',x===b));
+});
+custom.addEventListener('input',()=>{base=custom.value;applyShade();});
+shadeEl.addEventListener('input',applyShade);
 $('#cancel').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('close',()=>{editingId=null});
 grid.addEventListener('click',e=>{

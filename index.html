@@ -40,10 +40,25 @@
       <label>Brand
         <input type="text" name="brand" required pattern=".*\S.*" maxlength="60" placeholder="e.g. Diamine">
       </label>
-      <label class="color-row">Color
-        <input type="color" name="color" value="#6d1828">
-        <span id="hex">#6d1828</span>
-      </label>
+      <fieldset class="rate">
+        <legend>Color</legend>
+        <div class="presets" id="presets" role="group" aria-label="Preset colors">
+          <button type="button" class="preset" data-c="#6d1828" style="--c:#6d1828" aria-label="Oxblood red"></button>
+          <button type="button" class="preset" data-c="#2ea8e0" style="--c:#2ea8e0" aria-label="Sky blue"></button>
+          <button type="button" class="preset" data-c="#1f5c3d" style="--c:#1f5c3d" aria-label="Emerald green"></button>
+          <button type="button" class="preset" data-c="#5b2d6e" style="--c:#5b2d6e" aria-label="Violet"></button>
+          <button type="button" class="preset" data-c="#6e4a1f" style="--c:#6e4a1f" aria-label="Sepia brown"></button>
+          <button type="button" class="preset" data-c="#2b2b2b" style="--c:#2b2b2b" aria-label="Ink black"></button>
+        </div>
+        <span class="color-row">
+          <input type="color" id="custom" aria-label="Custom color">
+          <span id="hex">#6d1828</span>
+        </span>
+        <label class="shade-row">Shade
+          <input type="range" id="shade" min="0" max="100" value="50">
+        </label>
+        <input type="hidden" name="color" value="#6d1828">
+      </fieldset>
       <label>Notes
         <textarea name="notes" rows="3" placeholder="Shading, sheen, behavior…"></textarea>
       </label>
