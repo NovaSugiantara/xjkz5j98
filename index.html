@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ink Swatch Journal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="hero">
+    <p class="eyebrow">Fountain pen collection</p>
+    <h1>Ink Swatch Journal</h1>
+    <p class="intro">Every bottle and sample, logged as a swatch.</p>
+  </header>
+
+  <section class="toolbar">
+    <input type="search" id="search" placeholder="Search ink or brand…" aria-label="Search inks">
+    <button class="btn primary" id="addBtn" type="button">+ Add ink</button>
+  </section>
+
+  <p class="meta" id="count" aria-live="polite"></p>
+
+  <section id="status" class="status" aria-live="polite"></section>
+
+  <section class="grid" id="grid" aria-label="Ink swatches"></section>
+
+  <dialog id="dlg">
+    <form id="form">
+      <h2 id="dlgTitle">Add ink</h2>
+      <label>Ink name
+        <input type="text" name="name" required maxlength="80" placeholder="e.g. Oxblood">
+      </label>
+      <label>Brand
+        <input type="text" name="brand" required maxlength="60" placeholder="e.g. Diamine">
+      </label>
+      <label class="color-row">Color
+        <input type="color" name="color" value="#6d1828">
+        <span id="hex">#6d1828</span>
+      </label>
+      <label>Notes
+        <textarea name="notes" rows="3" placeholder="Shading, sheen, behavior…"></textarea>
+      </label>
+      <fieldset class="rate">
+        <legend>Rating</legend>
+        <input type="hidden" name="rating" value="3">
+        <div class="stars" id="stars">
+          <button type="button" value="1" aria-label="Rate 1 out of 5">★</button>
+          <button type="button" value="2" aria-label="Rate 2 out of 5">★</button>
+          <button type="button" value="3" aria-label="Rate 3 out of 5">★</button>
+          <button type="button" value="4" aria-label="Rate 4 out of 5">★</button>
+          <button type="button" value="5" aria-label="Rate 5 out of 5">★</button>
+        </div>
+      </fieldset>
+      <div class="form-actions">
+        <button type="button" class="btn" id="cancel">Cancel</button>
+        <button type="submit" class="btn primary" id="submit">Save ink</button>
+      </div>
+    </form>
+  </dialog>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
