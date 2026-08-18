@@ -62,6 +62,13 @@ wc -c index.html style.css app.js
 # hard cap 25000 bytes, target <= 23000
 ```
 
+For the conservative repository-wide check, including the committed harness:
+
+```sh
+find . -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) \
+  -not -path './.git/*' -print0 | xargs -0 wc -c
+```
+
 ### What to check as an evaluator
 
 1. Add an ink: pick a preset color or the custom picker, move the shade slider (dark to light), set a rating.

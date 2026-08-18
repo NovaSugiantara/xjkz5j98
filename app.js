@@ -26,6 +26,7 @@ function applyShade(){
   hex.textContent=form.color.value;
   preview.style.background=form.color.value;
 }
+function markPreset(){[...presets.children].forEach(x=>x.classList.toggle('on',x.dataset.c===base))}
 
 function render(){
   const q=search.value.trim().toLowerCase();
@@ -71,6 +72,7 @@ function openForm(id){
   custom.value=base;
   shadeEl.value=50;
   applyShade();
+  markPreset();
   if(ink){
     form.name.value=ink.name;
     form.brand.value=ink.brand;
@@ -110,9 +112,9 @@ presets.addEventListener('click',e=>{
   base=b.dataset.c;
   custom.value=base;
   applyShade();
-  [...presets.children].forEach(x=>x.classList.toggle('on',x===b));
+  markPreset();
 });
-custom.addEventListener('input',()=>{base=custom.value;applyShade();});
+custom.addEventListener('input',()=>{base=custom.value;applyShade();markPreset();});
 shadeEl.addEventListener('input',applyShade);
 $('#cancel').addEventListener('click',()=>dlg.close());
 dlg.addEventListener('close',()=>{editingId=null});

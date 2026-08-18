@@ -14,6 +14,7 @@ const $=s=>document.querySelector(s);
 const form=$("#form"),dlg=$("#dlg"),grid=$("#grid"),status=$("#status"),count=$("#count");
 const search=$("#search"),starsEl=$("#stars"),hex=$("#hex"),dlgTitle=$("#dlgTitle");
 const customEl=$("#custom"),shadeEl=$("#shade"),presetsEl=$("#presets"),previewEl=$("#preview");
+presetsEl.children=["#6d1828","#2ea8e0"].map(c=>({dataset:{c},classList:{toggle(_,v){this.on=v}}}));
 global.localStorage.getItem=()=>JSON.stringify([
 {id:"a1",name:"Oxblood",brand:"Diamine",color:"#6d1828",notes:"Rich burgundy.",rating:3.5,createdAt:100},
 {id:"a2",name:"Kon-Peki",brand:"Iroshizuku",color:"#2ea8e0",notes:"",rating:5,createdAt:200},
@@ -121,6 +122,8 @@ presetsEl.dispatch("click",{target:{closest:s=>s==="button[data-c]"?{dataset:{c:
 assert.strictEqual(customEl.value,"#2ea8e0");
 assert.strictEqual(form.color.value,"#2ea8e0");
 assert.strictEqual(hex.textContent,"#2ea8e0");
+assert.strictEqual(presetsEl.children[0].classList.on,false);
+assert.strictEqual(presetsEl.children[1].classList.on,true);
 shadeEl.value=25;shadeEl.dispatch("input");
 assert.strictEqual(form.color.value,"#175470");
 assert.strictEqual(previewEl.style.background,"#175470");
@@ -133,10 +136,14 @@ customEl.value="#123456";customEl.dispatch("input");
 assert.strictEqual(form.color.value,"#123456");
 assert.strictEqual(hex.textContent,"#123456");
 assert.strictEqual(previewEl.style.background,"#123456");
+assert.strictEqual(presetsEl.children[0].classList.on,false);
+assert.strictEqual(presetsEl.children[1].classList.on,false);
 openForm(inks.find(i=>i.name==="Oxblood 2").id);
 assert.strictEqual(customEl.value,"#6d1828");
 assert.strictEqual(form.color.value,"#6d1828");
 assert.strictEqual(shadeEl.value,50);
+assert.strictEqual(presetsEl.children[0].classList.on,true);
+assert.strictEqual(presetsEl.children[1].classList.on,false);
 openForm(inks.find(i=>i.name==="Kon-Peki").id);
 form.color.value="zzz";
 form.notes.value="";
@@ -154,6 +161,7 @@ assert.strictEqual(dlg.open,true);
 assert.strictEqual(dlgTitle.textContent,"Add ink");
 assert.strictEqual(customEl.value,"#6d1828");
 assert.strictEqual(form.color.value,"#6d1828");
+assert.strictEqual(presetsEl.children[0].classList.on,true);
 localStorage.setItem=()=>{throw new Error("full")};
 form.name.value="X";
 form.brand.value="Y";
