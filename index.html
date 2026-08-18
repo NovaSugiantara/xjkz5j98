@@ -35,10 +35,10 @@
     <form id="form">
       <h2 id="dlgTitle">Add ink</h2>
       <label>Ink name
-        <input type="text" name="name" required maxlength="80" placeholder="e.g. Oxblood">
+        <input type="text" name="name" required pattern=".*\S.*" maxlength="80" placeholder="e.g. Oxblood">
       </label>
       <label>Brand
-        <input type="text" name="brand" required maxlength="60" placeholder="e.g. Diamine">
+        <input type="text" name="brand" required pattern=".*\S.*" maxlength="60" placeholder="e.g. Diamine">
       </label>
       <label class="color-row">Color
         <input type="color" name="color" value="#6d1828">
